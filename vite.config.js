@@ -6,6 +6,7 @@ export default defineConfig({
   plugins: [react()],
   preview: {
     port: 3030,
+    host: '0.0.0.0',
     allowedHosts: ['.kirken.xyz'],
   },
   server: {
