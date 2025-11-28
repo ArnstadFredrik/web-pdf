@@ -2,11 +2,11 @@
   box-sizing: border-box;
 }
 
-#root {
+.root {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
   text-align: center;
+  padding-inline: 0.5rem;
 }
 
 .logo {
@@ -51,18 +51,46 @@
   gap: 1rem;
 }
 
-input {
+.filePicker {
   padding: 0.5rem;
   font-size: 1rem;
   background-color:  hsl(210, 36%, 44%, 0.2);
   border-radius: 0.5rem;
+  width: 100%;
+}
+
+.options {
+  font-size: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  background-color: hsl(210, 36%, 44%, 0.1);
+  border-radius: 0.5rem;
+}
+
+.options label {
+  padding-inline: 0.5rem;
+}
+
+.upload {
+  gap: 0.5rem;
 }
 
 .info {
   background-color:  hsl(210, 36%, 44%, 0.2);
   padding: 0.5rem;
-  margin-block: 0.5rem;
   border-radius: 0.5rem;
+  display: grid;
+  grid-template-columns: 2fr 0.5fr 0.5fr 1fr;
+}
+
+.download_button {
+  align-content: center;
+}
+
+.list-row {
+  grid-column: span 4;
+  display: grid;
+  grid-template-columns: subgrid;
 }
 
 .color-green {
@@ -70,4 +98,8 @@ input {
 }
 .color-blue {
   background-color: hsl(210, 36%, 44%);
+}
+
+.grid {
+  display: grid;
 }

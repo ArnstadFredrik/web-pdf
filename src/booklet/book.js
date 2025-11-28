@@ -11,7 +11,7 @@ import {make_leaflet} from './make_leaflet.js'
 
 export async function create_book({file, short_edge = false }) {
 
-  console.log({short_edge})
+console.log({short_edge})
 
 // import pdf file
 //const file = await getFile()

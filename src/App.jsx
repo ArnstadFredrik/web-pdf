@@ -3,6 +3,8 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import {create_book} from './booklet/book.js'
+import InputOption from './components/InputOption.jsx'
+import FileList from './components/FileList.jsx'
 
 
 
@@ -39,23 +41,30 @@ const Upload = () => {
   }
 
   return (
-    <div clss="upload">
+    <div className="upload grid">
         <input
+          className='filePicker'
           onChange={handleFileChange} 
           type='file' 
           id="upload" 
           name="upload"
         />
 
-        <input type="checkbox" id="short_edge" onChange={handleShortEdge} checked={shortEdge}/>
-        <label htmlFor="short_edge">Kortside</label>
+        {file && (
+          <div className="options">
+            <h3>Valg</h3>
+            <InputOption 
+              onChange={handleShortEdge} 
+              checked={shortEdge} 
+              label="Brett langs kortside" 
+              id="short_edge" 
+              type="checkbox"
+            />
+          </div>
+        )}
 
       {file && (
-        <div className='info'>
-          <p><strong>File Name:</strong> {file.name}</p>
-          <p><strong>Size:</strong> {Math.round(file.size / 1000)} kB</p>
-          <p><strong>Type:</strong> {file.type.split('/')[1]}</p>
-        </div>
+        <FileList file={file} download={download}/>
       )}
 
       <div className="actions">
@@ -63,9 +72,6 @@ const Upload = () => {
           <button onClick={handleFileConvert} className="color-blue">Convert to Book</button>
         )}
 
-      {download && (
-        <a href={URL.createObjectURL(download.file)} download={`${download.fileName}-book.pdf`}><button className="color-green">Last ned</button></a>
-      )}
       </div>
 
 
@@ -76,7 +82,7 @@ const Upload = () => {
 const App = () => {
   return (
     <>
-    <h2>PDF Hefte</h2>
+    <h1>PDF Hefte</h1>
     <Upload />
     </>
   )
