@@ -38,12 +38,13 @@ const Upload = () => {
 
   function handleShortEdge(e) {
     setShortEdge(e.target.checked)
+    setDownload('')
   }
 
   return (
     <div className="upload grid">
         <input
-          className='filePicker'
+          className='filePicker content'
           onChange={handleFileChange} 
           type='file' 
           id="upload" 
@@ -51,7 +52,7 @@ const Upload = () => {
         />
 
         {file && (
-          <div className="options">
+          <div className="options content">
             <h3>Valg</h3>
             <InputOption 
               onChange={handleShortEdge} 
@@ -67,7 +68,7 @@ const Upload = () => {
         <FileList file={file} download={download}/>
       )}
 
-      <div className="actions">
+      <div className="actions content">
         {file && (
           <button onClick={handleFileConvert} className="color-blue">Convert to Book</button>
         )}

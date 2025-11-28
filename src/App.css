@@ -6,7 +6,7 @@
   max-width: 1280px;
   margin: 0 auto;
   text-align: center;
-  padding-inline: 0.5rem;
+  padding-inline: 1rem;
 }
 
 .logo {
@@ -61,10 +61,11 @@
 
 .options {
   font-size: 1.2rem;
-  display: flex;
-  flex-direction: column;
+  display: grid;
   background-color: hsl(210, 36%, 44%, 0.1);
   border-radius: 0.5rem;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
 }
 
 .options label {
@@ -73,6 +74,21 @@
 
 .upload {
   gap: 0.5rem;
+  grid-template-columns: [full-width-start] 0.5fr [content-start] 1fr [content-end] 0.5fr [full-width-end]; 
+}
+
+.content {
+  grid-column: content;
+}
+
+@media (max-width: 830px) {
+  .content {
+    grid-column: full-width;
+  }
+}
+
+.full-width {
+  grid-column: full-width;
 }
 
 .info {
@@ -80,7 +96,24 @@
   padding: 0.5rem;
   border-radius: 0.5rem;
   display: grid;
-  grid-template-columns: 2fr 0.5fr 0.5fr 1fr;
+  grid-template-columns: 2fr 0.5fr 0.5fr 0.5fr;
+}
+
+
+@media (max-width: 830px) {
+  .info {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .fileName {
+    grid-column: 1 / -1;
+  }
+  .download_button {
+    grid-column: span 2;
+  }
+}
+
+.italic {
+  font-style: italic;
 }
 
 .download_button {
@@ -88,7 +121,7 @@
 }
 
 .list-row {
-  grid-column: span 4;
+  grid-column: 1 / -1;
   display: grid;
   grid-template-columns: subgrid;
 }
