@@ -9,6 +9,7 @@ import {create_book} from './booklet/book.js'
 const Upload = () => {
   const [file, setFile] = useState('')
   const [download, setDownload] = useState('')
+  const [shortEdge, setShortEdge] = useState(true)
 
   function handleFileChange(e) {
     if (e.target.files) {
@@ -26,11 +27,15 @@ const Upload = () => {
     
     const fileName = file.name.split('.pdf')[0]
   
-    const pdfArray = await create_book({file: fileBuffer})
+    const pdfArray = await create_book({file: fileBuffer, short_edge: shortEdge})
     const pdf = new Blob([pdfArray],{type: 'application/pdf'})
 
     if (pdf) setDownload({file: pdf, fileName})  
     
+  }
+
+  function handleShortEdge(e) {
+    setShortEdge(e.target.checked)
   }
 
   return (
@@ -41,6 +46,9 @@ const Upload = () => {
           id="upload" 
           name="upload"
         />
+
+        <input type="checkbox" id="short_edge" onChange={handleShortEdge} checked={shortEdge}/>
+        <label htmlFor="short_edge">Kortside</label>
 
       {file && (
         <div className='info'>

@@ -9,14 +9,21 @@ import {make_leaflet} from './make_leaflet.js'
 //  return file
 //}
 
-export async function create_book({file}) {
+export async function create_book({file, short_edge = false }) {
 
+  console.log({short_edge})
 
 // import pdf file
 //const file = await getFile()
 
 const src_pdf = await PDFDocument.load(file)
-const src_pages = src_pdf.getPages()
+let src_pages = src_pdf.getPages()
+
+if (src_pages.length % 2 !== 0) {
+  const empty_page = src_pdf.addPage()
+  empty_page.drawText('')
+  src_pages = src_pdf.getPages()
+}
 
 // create booklet document
 const booklet = await PDFDocument.create(PageSizes.A4)
@@ -37,7 +44,7 @@ embedded_pages_sorted.forEach(async (leaflet, i) => {
     first_page: leaflet[1],
     last_page: leaflet[0],
     leaflet_number: i,
-    short_edge: false
+    short_edge,
   })
 })
 

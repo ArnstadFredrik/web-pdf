@@ -1,7 +1,7 @@
 export async function sort_booklet({booklet, src_pages}) {
-    const embedded_pages = await booklet.embedPages([...src_pages])
-    
+    const embedded_pages = await booklet.embedPages([...src_pages])    
     const length = embedded_pages.length
+    
     // [fist,last] etc.
     const bookList = []
 
