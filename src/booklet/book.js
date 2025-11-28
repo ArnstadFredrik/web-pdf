@@ -19,10 +19,17 @@ export async function create_book({file, short_edge = false }) {
 const src_pdf = await PDFDocument.load(file)
 let src_pages = src_pdf.getPages()
 
-if (src_pages.length % 2 !== 0) {
-  const empty_page = src_pdf.addPage()
-  empty_page.drawText('')
-  src_pages = src_pdf.getPages()
+
+if ( src_pages.length % 4 !== 0) {
+  const length = src_pages.length
+  let closest = length + (4 - (length % 4))
+  let fill_pages = closest - length
+  for (let i = 0; i < fill_pages; i++) {
+    console.log({i})
+    const empty_page = src_pdf.addPage()
+    empty_page.drawText('')
+    src_pages = src_pdf.getPages()
+  }
 }
 
 // create booklet document
@@ -32,6 +39,7 @@ const booklet = await PDFDocument.create(PageSizes.A4)
 
 // make leaflets pages.length / 2
 const length = src_pages.length
+
 const leaflets_needed = src_pages.length / 2
 
 console.log({length,leaflets_needed})
