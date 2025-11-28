@@ -32,8 +32,6 @@ console.log({length,leaflets_needed})
 const embedded_pages_sorted = await sort_booklet({booklet, src_pages})
 
 embedded_pages_sorted.forEach(async (leaflet, i) => {
-  console.log({leaflet_number: i, remainder: i % 2});
-  
   await make_leaflet({
     booklet,
     first_page: leaflet[1],
