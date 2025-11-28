@@ -7,24 +7,14 @@ import InputOption from './components/InputOption.jsx'
 import FileList from './components/FileList.jsx'
 
 
-
 const Upload = () => {
   const [file, setFile] = useState('')
+  const [progress, setProgress] = useState(false)
   const [download, setDownload] = useState('')
   const [shortEdge, setShortEdge] = useState(true)
 
-  function handleFileChange(e) {
-    if (e.target.files) {
-      console.log('file is selected');
- 
-      setFile(e.target.files[0])
-      setDownload('')
-    } else {
-      console.log('file is not selected');
-    }
-  }
-
-  async function handleFileConvert(e) {
+  async function handleFileConvert() {
+    setProgress(() => true)
     const fileBuffer = await file.arrayBuffer()
     
     const fileName = file.name.split('.pdf')[0]
@@ -32,13 +22,29 @@ const Upload = () => {
     const pdfArray = await create_book({file: fileBuffer, short_edge: shortEdge})
     const pdf = new Blob([pdfArray],{type: 'application/pdf'})
 
-    if (pdf) setDownload({file: pdf, fileName})  
+    if (pdf) {
+      setDownload({file: pdf, fileName})
+      setProgress(() => false)
+    }
     
   }
 
-  function handleShortEdge(e) {
+  async function handleFileChange(e) {
+    if (e.target.files) {
+      console.log('file is selected');
+      const upload = e.target.files[0]
+      setFile(() => upload)
+      console.log({file})
+      setDownload('')
+    } else {
+      console.log('file is not selected');
+    }    
+  }
+
+  async function handleShortEdge(e) {
     setShortEdge(e.target.checked)
     setDownload('')
+    await handleFileConvert()
   }
 
   return (
@@ -65,16 +71,13 @@ const Upload = () => {
         )}
 
       {file && (
-        <FileList file={file} download={download}/>
+        <FileList 
+          file={file} 
+          download={download} 
+          handleFileConvert={handleFileConvert}
+          progress={progress}
+          />
       )}
-
-      <div className="actions content">
-        {file && (
-          <button onClick={handleFileConvert} className="color-blue">Convert to Book</button>
-        )}
-
-      </div>
-
 
     </div>
   )

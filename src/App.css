@@ -93,27 +93,41 @@
 
 .info {
   background-color:  hsl(210, 36%, 44%, 0.2);
-  padding: 0.5rem;
+  padding: 1rem;
   border-radius: 0.5rem;
   display: grid;
-  grid-template-columns: 2fr 0.5fr 0.5fr 0.5fr;
+  gap: 1rem;
+  grid-template-columns: 2fr repeat(3, 0.5fr);
 }
 
 
 @media (max-width: 830px) {
   .info {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
   .fileName {
     grid-column: 1 / -1;
   }
-  .download_button {
-    grid-column: span 2;
-  }
+}
+
+.fileName::before {
+  content: 'Navn';
+  font-weight: bold;
+  display: block;
+}
+
+.fileSize::before {
+  content: 'Størrelse';
+  font-weight: bold;
+  display: block;
 }
 
 .italic {
   font-style: italic;
+}
+
+.convert_button {
+  align-self: center;
 }
 
 .download_button {
@@ -136,3 +150,23 @@
 .grid {
   display: grid;
 }
+
+.loader {
+    width: 48px;
+    height: 48px;
+    border: 5px solid #FFF;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+    }
+
+    @keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+    } 
