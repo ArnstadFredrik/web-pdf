@@ -14,7 +14,8 @@ const Upload = () => {
     if (e.target.files) {
       console.log('file is selected');
  
-      setFile(e.target.files[0])      
+      setFile(e.target.files[0])
+      setDownload('')
     } else {
       console.log('file is not selected');
     }
@@ -34,7 +35,7 @@ const Upload = () => {
 
   return (
     <div clss="upload">
-        <input 
+        <input
           onChange={handleFileChange} 
           type='file' 
           id="upload" 
@@ -42,18 +43,22 @@ const Upload = () => {
         />
 
       {file && (
-        <div>
-          <p>File Name: {file.name}</p>
-          <p>Size: {file.size}</p>
-          <p>Type: {file.type}</p>
+        <div className='info'>
+          <p><strong>File Name:</strong> {file.name}</p>
+          <p><strong>Size:</strong> {Math.round(file.size / 1000)} kB</p>
+          <p><strong>Type:</strong> {file.type.split('/')[1]}</p>
         </div>
       )}
 
-      <button onClick={handleFileConvert}>Convert to Book</button>
+      <div className="actions">
+        {file && (
+          <button onClick={handleFileConvert} className="color-blue">Convert to Book</button>
+        )}
 
       {download && (
-        <a href={URL.createObjectURL(download.file)} download={`${download.fileName}-book.pdf`}><button>Last ned</button></a>
+        <a href={URL.createObjectURL(download.file)} download={`${download.fileName}-book.pdf`}><button className="color-green">Last ned</button></a>
       )}
+      </div>
 
 
     </div>

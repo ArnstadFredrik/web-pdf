@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -39,4 +43,31 @@
 
 .read-the-docs {
   color: #888;
+}
+
+.actions {
+  display: grid;
+  grid-template-rows: auto-fit;
+  gap: 1rem;
+}
+
+input {
+  padding: 0.5rem;
+  font-size: 1rem;
+  background-color:  hsl(210, 36%, 44%, 0.2);
+  border-radius: 0.5rem;
+}
+
+.info {
+  background-color:  hsl(210, 36%, 44%, 0.2);
+  padding: 0.5rem;
+  margin-block: 0.5rem;
+  border-radius: 0.5rem;
+}
+
+.color-green {
+  background-color: hsl(153, 36%, 44%);
+}
+.color-blue {
+  background-color: hsl(210, 36%, 44%);
 }
