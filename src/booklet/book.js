@@ -8,7 +8,7 @@ import { make_leaflet } from "./make_leaflet.js";
 //  return file
 //}
 
-export async function create_book({ file, short_edge = false }) {
+export async function create_book({ file, short_edge }) {
   console.log({ short_edge });
 
   // import pdf file

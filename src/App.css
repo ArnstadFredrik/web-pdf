@@ -1,12 +1,27 @@
-* {
-    box-sizing: border-box;
+:root {
+    --fs-sm: clamp(0.4rem, 0.5rem, 0.75rem);
+    --fs-base: clamp(0.75, 0.9rem, 1.1rem);
+    --fs-md: clamp(1.1rem, 1.125rem, 1.2rem);
+    --fs-lg: clamp(1.2rem, 1.5rem, 1.7rem);
+
+    --color-highlight: hsl(210, 36%, 44%, 0.2);
+    --color-light: hsl(20, 100%, 95%);
+
+    --color-green: hsl(153, 36%, 44%);
+    --color-green-light: hsl(153, 36%, 54%);
+    --color-green-dark: hsl(153, 36%, 34%);
+    --color-blue: hsl(210, 36%, 44%);
+    --color-blue-light: hsl(210, 36%, 54%);
+    --color-blue-dark: hsl(210, 36%, 34%);
+    --color-red: hsl(10, 36%, 44%);
+    --color-red-light: hsl(10, 36%, 54%);
+    --color-red-dark: hsl(10, 36%, 34%);
+
+    --radius: 0.5rem;
 }
 
-.root {
-    max-width: 1280px;
-    margin: 0 auto;
-    text-align: center;
-    padding-inline: 1rem;
+* {
+    box-sizing: border-box;
 }
 
 .logo {
@@ -37,150 +52,54 @@
     }
 }
 
-.card {
-    padding: 2em;
-}
-
-.read-the-docs {
-    color: #888;
-}
-
-.actions {
+body {
     display: grid;
-    grid-template-rows: auto-fit;
-    gap: 1rem;
-}
-
-.filePicker {
-    padding: 0.5rem;
-    font-size: 1rem;
-    background-color: hsl(210, 36%, 44%, 0.2);
-    border-radius: 0.5rem;
-    grid-column: content;
-}
-
-.settings_icon {
-    justify-self: center;
-    align-self: center;
-}
-
-.options {
-    font-size: 1.2rem;
-    display: grid;
-    background-color: hsl(210, 36%, 44%, 0.1);
-    border-radius: 0.5rem;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    position: absolute;
-    right: 1rem;
-    top: 1rem;
-}
-
-.options label {
-    padding-inline: 0.5rem;
-}
-
-.upload {
+    grid-template-columns:
+        [full-width-start] 0.5fr [content-start] 2fr
+        [content-end] 0.5fr [full-width-end];
     gap: 0.5rem;
-    grid-template-columns: [full-width-start] 0.5fr [content-start] 1fr [content-end] 0.5fr [full-width-end];
+    /*grid-template-rows: [topbar-start] 0.5fr [title-start] 0.5fr [upload-start] 5rem [info-start] 1fr;*/
+    position: relative;
 }
 
 .content {
     grid-column: content;
 }
 
-@media (max-width: 830px) {
-    .content {
-        grid-column: full-width-start / content-end;
-    }
-}
-
 .full-width {
-    grid-column: full-width;
-}
-
-.info {
-    background-color: hsl(210, 36%, 44%, 0.2);
-    padding: 1rem;
-    border-radius: 0.5rem;
-    display: grid;
-    gap: 1rem;
-    grid-template-columns: 2fr repeat(3, 0.5fr);
-}
-
-@media (max-width: 830px) {
-    .info {
-        grid-template-columns: repeat(3, 1fr);
-    }
-    .fileName {
-        grid-column: 1 / -1;
-    }
-}
-
-.fileName::before {
-    content: "Navn";
-    font-weight: bold;
-    display: block;
-}
-
-.fileSize::before {
-    content: "Størrelse";
-    font-weight: bold;
-    display: block;
-}
-
-.italic {
-    font-style: italic;
-}
-
-a button {
-    color: black;
-}
-
-.convert_button,
-.button {
-    align-self: center;
-    justify-self: center;
-}
-
-.download_button {
-    align-content: center;
-}
-
-.list-row {
-    grid-column: 1 / -1;
-    display: grid;
-    grid-template-columns: subgrid;
-}
-
-.color-green {
-    background-color: hsl(153, 36%, 44%);
-    color: white;
-}
-.color-blue {
-    background-color: hsl(210, 36%, 44%);
+    grid-column: content;
 }
 
 .grid {
     display: grid;
 }
 
-.loader {
-    width: 48px;
-    height: 48px;
-    border: 5px solid #fff;
-    border-bottom-color: transparent;
-    border-radius: 50%;
-    display: inline-block;
-    box-sizing: border-box;
-    animation: rotation 1s linear infinite;
+.flex {
+    display: flex;
 }
 
-@keyframes rotation {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
+.color-green {
+    background-color: var(--color-green);
+}
+
+.color-blue {
+    background-color: var(--color-blue);
+}
+
+.color-red {
+    background-color: var(--color-red);
+}
+
+.italic {
+    font-style: italic;
+}
+
+.strong {
+    font-weight: bold;
+}
+
+@media (max-width: 500px) {
+    .content {
+        grid-column: full-width;
     }
 }

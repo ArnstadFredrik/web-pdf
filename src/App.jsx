@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./App.css";
+import "./Component.css";
 import { create_book } from "./booklet/book.js";
 import InputOption from "./components/InputOption.jsx";
 import FileList from "./components/FileList.jsx";
@@ -12,18 +13,19 @@ const Upload = () => {
   const [file, setFile] = useState("");
   const [progress, setProgress] = useState(false);
   const [download, setDownload] = useState("");
-  const [shortEdge, setShortEdge] = useState(true);
+  const [shortEdge, setShortEdge] = useState(false);
   const [settings, setSettings] = useState(false);
 
   async function handleFileConvert() {
     setProgress(() => true);
     const fileBuffer = await file.arrayBuffer();
+    const short_edge = shortEdge;
 
     const fileName = file.name.split(".pdf")[0];
 
     const pdfArray = await create_book({
       file: fileBuffer,
-      short_edge: shortEdge,
+      short_edge,
     });
     const pdf = new Blob([pdfArray], { type: "application/pdf" });
 
@@ -32,6 +34,10 @@ const Upload = () => {
       setProgress(() => false);
     }
   }
+
+  useEffect(() => {
+    console.log({ shortEdge });
+  }, [shortEdge]);
 
   useEffect(() => {
     if (file) handleFileConvert();
@@ -50,7 +56,7 @@ const Upload = () => {
   }
 
   async function handleShortEdge(e) {
-    setShortEdge(e.target.checked);
+    setShortEdge(() => e.target.checked);
     setDownload("");
     await handleFileConvert();
   }
@@ -60,23 +66,25 @@ const Upload = () => {
   }
 
   return (
-    <div className="upload grid">
-      <input
-        className="filePicker content"
-        onChange={handleFileChange}
-        type="file"
-        id="upload"
-        name="upload"
-        accept=".pdf"
-      />
+    <>
+      <div className="upload content flex">
+        <input
+          className="filePicker content"
+          onChange={handleFileChange}
+          type="file"
+          id="upload"
+          name="upload"
+          accept=".pdf"
+        />
 
-      <Icon
-        className="settings_icon"
-        path={mdiCog}
-        title="Innstillinger"
-        size={1}
-        onClick={handleSettings}
-      />
+        <Icon
+          className="settings_icon"
+          path={mdiCog}
+          title="Innstillinger"
+          size={1}
+          onClick={handleSettings}
+        />
+      </div>
 
       {settings && (
         <div className="options content">
@@ -99,14 +107,14 @@ const Upload = () => {
           progress={progress}
         />
       )}
-    </div>
+    </>
   );
 };
 
 const App = () => {
   return (
     <>
-      <h1>PDF Hefte</h1>
+      <h1 className="page_title content">PDF Hefte</h1>
       <Upload />
     </>
   );
