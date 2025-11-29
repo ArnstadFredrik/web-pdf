@@ -28,7 +28,7 @@ const Upload = () => {
     const pdf = new Blob([pdfArray], { type: "application/pdf" });
 
     if (pdf) {
-      setDownload({ file: pdf, fileName, url: URL.createObjectURL(file) });
+      setDownload({ file: pdf, fileName, url: URL.createObjectURL(pdf) });
       setProgress(() => false);
     }
   }
