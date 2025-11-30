@@ -4,8 +4,8 @@ import "./Component.css";
 import { create_book } from "./booklet/book.js";
 import InputOption from "./components/InputOption.jsx";
 import FileList from "./components/FileList.jsx";
+import EmbedPdf from "./components/EmbedPdf.jsx";
 import { useEffect } from "react";
-import { useCallback } from "react";
 import Icon from "@mdi/react";
 import { mdiCog } from "@mdi/js";
 
@@ -15,6 +15,7 @@ const Upload = () => {
   const [download, setDownload] = useState("");
   const [shortEdge, setShortEdge] = useState(false);
   const [settings, setSettings] = useState(false);
+  const [preview, setPreview] = useState(false);
 
   async function handleFileConvert() {
     setProgress(() => true);
@@ -36,12 +37,8 @@ const Upload = () => {
   }
 
   useEffect(() => {
-    console.log({ shortEdge });
-  }, [shortEdge]);
-
-  useEffect(() => {
     if (file) handleFileConvert();
-  }, [file]);
+  }, [file, shortEdge]);
 
   async function handleFileChange(e) {
     if (e.target.files) {
@@ -58,16 +55,19 @@ const Upload = () => {
   async function handleShortEdge(e) {
     setShortEdge(() => e.target.checked);
     setDownload("");
-    await handleFileConvert();
   }
 
   function handleSettings() {
     setSettings((settings) => (settings ? false : true));
   }
 
+  function handlePreview() {
+    setPreview((preview) => (preview ? false : true));
+  }
+
   return (
     <>
-      <div className="upload content flex">
+      <div className="upload content grid">
         <input
           className="filePicker content"
           onChange={handleFileChange}
@@ -105,8 +105,10 @@ const Upload = () => {
           download={download}
           handleFileConvert={handleFileConvert}
           progress={progress}
+          handlePreview={handlePreview}
         />
       )}
+      {download && preview && <EmbedPdf download={download} />}
     </>
   );
 };

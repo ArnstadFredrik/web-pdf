@@ -1,8 +1,15 @@
 import printJS from "print-js";
 import Icon from "@mdi/react";
-import { mdiFileDownload, mdiPrinter } from "@mdi/js";
+import { mdiEye, mdiFileDownload, mdiPrinter } from "@mdi/js";
+import "./loader.css";
 
-const FileListItem = ({ file, download, handleFileConvert, progress }) => {
+const FileListItem = ({
+  file,
+  download,
+  handleFileConvert,
+  progress,
+  handlePreview,
+}) => {
   let fileSize;
   if (file.size > 1000000) {
     fileSize = `${(file.size / 1000 / 1000).toFixed(1)} MB`;
@@ -43,9 +50,11 @@ const FileListItem = ({ file, download, handleFileConvert, progress }) => {
           <button
             onClick={handlePrint}
             className="print_button color-green button"
-            key={file.name}
           >
             <Icon path={mdiPrinter} title="Skriv ut" size={1} />
+          </button>
+          <button onClick={handlePreview} className="color-blue button">
+            <Icon path={mdiEye} title="Vis pdf" size={1} />
           </button>
         </>
       )}

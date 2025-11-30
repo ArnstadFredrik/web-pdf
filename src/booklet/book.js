@@ -9,8 +9,7 @@ import { make_leaflet } from "./make_leaflet.js";
 //}
 
 export async function create_book({ file, short_edge }) {
-  console.log({ short_edge });
-
+  console.log(`Create Book from file, option for short_edge is: ${short_edge}`);
   // import pdf file
   //const file = await getFile()
 
@@ -22,7 +21,6 @@ export async function create_book({ file, short_edge }) {
     let closest = length + (4 - (length % 4));
     let fill_pages = closest - length;
     for (let i = 0; i < fill_pages; i++) {
-      console.log({ i });
       const empty_page = src_pdf.addPage();
       empty_page.drawText("");
       src_pages = src_pdf.getPages();
@@ -33,11 +31,9 @@ export async function create_book({ file, short_edge }) {
   const booklet = await PDFDocument.create(PageSizes.A4);
 
   // make leaflets pages.length / 2
-  const length = src_pages.length;
+  //const length = src_pages.length;
 
-  const leaflets_needed = src_pages.length / 2;
-
-  console.log({ length, leaflets_needed });
+  //const leaflets_needed = src_pages.length / 2;
 
   const embedded_pages_sorted = await sort_booklet({ booklet, src_pages });
 
@@ -61,6 +57,8 @@ export async function create_book({ file, short_edge }) {
   // [ second, second to last ]
 
   const pdfBytes = await booklet.save();
+
+  console.log(`booklet is created`);
 
   //fs.writeFile('./document-mod.pdf', pdfBytes, err => {
   //  if (err) console.error(err)

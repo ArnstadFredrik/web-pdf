@@ -2,6 +2,7 @@
     gap: 1rem;
     place-items: center;
     justify-items: center;
+    grid-template-columns: 2fr minmax(auto, 0.5fr);
 }
 
 .upload input {
@@ -10,6 +11,11 @@
     background-color: var(--color-highlight);
     flex-grow: 1;
     border-radius: var(--radius);
+    grid-column: 1/2;
+}
+
+.upload svg {
+    grid-column: 2/3;
 }
 
 .info {
@@ -17,7 +23,7 @@
     padding: 1rem;
     background-color: var(--color-highlight);
     border-radius: var(--radius);
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(2, auto);
 }
 
@@ -58,4 +64,7 @@ button:active {
     font-weight: bold;
     padding-inline-end: 1rem;
     display: inline-block;
+}
+
+.pdf_view {
 }
