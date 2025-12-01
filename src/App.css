@@ -32,7 +32,13 @@ body {
     gap: 0.5rem;
     /*grid-template-rows: [topbar-start] 0.5fr [title-start] 0.5fr [upload-start] 5rem [info-start] 1fr;*/
     position: relative;
-    grid-template-rows: 0.5fr 0.5fr 1fr 2fr;
+    grid-template-rows: 0.5fr calc(var(--fs-base) + 2rem) 1fr 2fr;
+}
+
+h1,
+h2,
+h3 {
+    text-align: center;
 }
 
 .content {
@@ -69,6 +75,10 @@ body {
 
 .strong {
     font-weight: bold;
+}
+
+.button {
+    color: var(--color-light);
 }
 
 @media (max-width: 500px) {
