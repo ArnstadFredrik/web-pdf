@@ -34,6 +34,14 @@
     padding: 1rem;
 }
 
+.options h3 {
+    text-align: left;
+}
+
+.checkbox label {
+    padding-inline-start: 0.7rem;
+}
+
 .list-row {
     display: grid;
     grid-template-columns: subgrid;
@@ -65,7 +73,4 @@ button:active {
     font-weight: bold;
     padding-inline-end: 1rem;
     display: inline-block;
-}
-
-.pdf_view {
 }

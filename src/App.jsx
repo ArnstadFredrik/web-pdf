@@ -116,7 +116,7 @@ const Upload = () => {
 const App = () => {
   return (
     <>
-      <h1 className="page_title content">PDF Hefte</h1>
+      <h1 className="padding-large content">PDF Hefte</h1>
       <Upload />
     </>
   );

@@ -22,6 +22,8 @@
 
 * {
     box-sizing: border-box;
+    padding: 0;
+    margin: 0;
 }
 
 body {
@@ -85,4 +87,28 @@ h3 {
     .content {
         grid-column: full-width;
     }
+}
+
+.padding-large {
+    padding: 1.5rem;
+}
+
+.padding-base {
+    padding: 1rem;
+}
+
+.padding-small {
+    padding: 0.5rem;
+}
+
+.margin-large {
+    margin: 1.5rem;
+}
+
+.margin-base {
+    margin: 1rem;
+}
+
+.margin-small {
+    margin: 0.5rem;
 }
