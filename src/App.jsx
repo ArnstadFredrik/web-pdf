@@ -2,14 +2,13 @@ import { useState } from "react";
 import "./App.css";
 import "./Component.css";
 import { create_book } from "./booklet/book.js";
-import InputOption from "./components/InputOption.jsx";
 import FileList from "./components/FileList.jsx";
 import EmbedPdf from "./components/EmbedPdf.jsx";
 import { useEffect } from "react";
-import Icon from "@mdi/react";
-import { mdiCog } from "@mdi/js";
+import Settings from "./components/Settings.jsx";
+import Upload from "./components/Upload.jsx";
 
-const Upload = () => {
+const App = () => {
   const [file, setFile] = useState("");
   const [progress, setProgress] = useState(false);
   const [download, setDownload] = useState("");
@@ -64,39 +63,13 @@ const Upload = () => {
   function handlePreview() {
     setPreview((preview) => (preview ? false : true));
   }
-
   return (
     <>
-      <div className="upload content grid">
-        <input
-          className="filePicker content"
-          onChange={handleFileChange}
-          type="file"
-          id="upload"
-          name="upload"
-          accept=".pdf"
-        />
-
-        <Icon
-          className="settings_icon"
-          path={mdiCog}
-          title="Innstillinger"
-          size={1}
-          onClick={handleSettings}
-        />
-      </div>
+      <h1 className="padding-large content">PDF Hefte</h1>
+      <Upload onChange={handleFileChange} handleSettings={handleSettings} />
 
       {settings && (
-        <div className="options content">
-          <h3>Valg</h3>
-          <InputOption
-            onChange={handleShortEdge}
-            checked={shortEdge}
-            label="Brett langs kortside"
-            id="short_edge"
-            type="checkbox"
-          />
-        </div>
+        <Settings handleShortEdge={handleShortEdge} checked={shortEdge} />
       )}
 
       {file && (
@@ -109,15 +82,6 @@ const Upload = () => {
         />
       )}
       {download && preview && <EmbedPdf download={download} />}
-    </>
-  );
-};
-
-const App = () => {
-  return (
-    <>
-      <h1 className="padding-large content">PDF Hefte</h1>
-      <Upload />
     </>
   );
 };
