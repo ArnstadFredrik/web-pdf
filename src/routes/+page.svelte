@@ -9,6 +9,10 @@
     });
 </script>
 
+<svelte:head>
+    <title>PDF Hefte</title>
+</svelte:head>
+
 <h1 class="content page_title padding-base">PDF Hefte</h1>
 <Upload />
 {#if data.settingsMenu}
