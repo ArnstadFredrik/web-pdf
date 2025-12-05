@@ -3,6 +3,9 @@
     --fs-base: clamp(0.75, 0.9rem, 1.1rem);
     --fs-md: clamp(1.1rem, 1.125rem, 1.2rem);
     --fs-lg: clamp(1.2rem, 1.5rem, 1.7rem);
+    --fs-xl: clamp(2rem, 2.2rem, 2.7rem);
+
+    --ff: sans-serif;
 
     --color-highlight: hsl(210, 36%, 44%, 0.2);
     --color-light: hsl(20, 100%, 95%);
@@ -24,17 +27,19 @@
     box-sizing: border-box;
     padding: 0;
     margin: 0;
+    font-family: var(--ff);
 }
 
-body {
+.svelte_root {
     display: grid;
     grid-template-columns:
         [full-width-start] 0.5fr [content-start] 2fr
         [content-end] 0.5fr [full-width-end];
-    gap: 0.5rem;
+    gap: 1rem;
     /*grid-template-rows: [topbar-start] 0.5fr [title-start] 0.5fr [upload-start] 5rem [info-start] 1fr;*/
     position: relative;
     grid-template-rows: 0.5fr calc(var(--fs-base) + 2rem) 1fr 2fr;
+    padding: 1rem;
 }
 
 h1,

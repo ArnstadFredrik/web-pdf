@@ -1,0 +1,36 @@
+.options {
+    background-color: var(--color-highlight);
+    border-radius: var(--radius);
+    padding: 1rem;
+}
+
+.options h3 {
+    text-align: left;
+}
+
+.checkbox label {
+    padding-inline-start: 0.7rem;
+}
+
+.button,
+button {
+    border-style: none;
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius);
+}
+
+button:hover,
+button:active {
+    outline: 1px solid var(--color-light);
+}
+
+.fileName {
+    grid-column: 1/-1;
+}
+
+.fileName::before {
+    content: "Navn:";
+    font-weight: bold;
+    padding-inline-end: 1rem;
+    display: inline-block;
+}
