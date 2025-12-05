@@ -1,5 +1,9 @@
+import adapter from "@sveltejs/adapter-netlify";
+
 const config = {
-  kit: {},
+  kit: {
+    adapter: adapter(),
+  },
   compilerOptions: {
     experimental: {
       async: true,
