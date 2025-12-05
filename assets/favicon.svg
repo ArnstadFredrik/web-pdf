@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 1000 1000" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <path d="M1000,250L1000,750C1000,887.979 887.979,1000 750,1000L250,1000C112.021,1000 0,887.979 0,750L0,250C0,112.021 112.021,0 250,0L750,0C887.979,0 1000,112.021 1000,250Z" style="fill:url(#_Linear1);"/>
+    <path d="M1000,250L1000,750C1000,887.979 887.979,1000 750,1000L250,1000C112.021,1000 0,887.979 0,750L0,250C0,112.021 112.021,0 250,0L750,0C887.979,0 1000,112.021 1000,250ZM956,250C956,136.306 863.694,44 750,44L250,44C136.306,44 44,136.306 44,250L44,750C44,863.694 136.306,956 250,956L750,956C863.694,956 956,863.694 956,750L956,250Z" style="fill:rgb(179,129,228);"/>
+    <g transform="matrix(1.315841,0,0,1.315841,-141.317157,123.812568)">
+        <g transform="matrix(303.987995,0,0,303.987995,822.762572,400.772176)">
+        </g>
+        <text x="152px" y="400.772px" style="font-family:'Georgia-Bold', 'Georgia', serif;font-weight:700;font-size:303.988px;">PDF</text>
+    </g>
+    <defs>
+        <linearGradient id="_Linear1" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(-1000,0,-0,-1000,1000,500)"><stop offset="0" style="stop-color:rgb(97,24,170);stop-opacity:1"/><stop offset="0.5" style="stop-color:rgb(186,160,212);stop-opacity:1"/><stop offset="1" style="stop-color:rgb(97,24,170);stop-opacity:1"/></linearGradient>
+    </defs>
+</svg>
