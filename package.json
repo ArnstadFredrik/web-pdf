@@ -1,13 +1,14 @@
 {
   "name": "web-hefte",
   "private": true,
-  "version": "0.0.1",
+  "version": "0.0.2",
   "type": "module",
   "scripts": {
     "dev": "vite dev",
     "build": "vite build",
     "preview": "vite preview",
-    "generate:manifest": "node ./generate-manifest.js"
+    "generate:manifest": "node ./generate-manifest.js",
+    "app:run": "node build"
   },
   "dependencies": {
     "@mdi/js": "^7.4.47",
