@@ -6,8 +6,7 @@ COPY package.json yarn.lock ./
 
 RUN yarn
 
-COPY src/ ./src/
-COPY drizzle.config.js svelte.config.js vite.config.js ./
+COPY . ./
 
 RUN yarn build
 
