@@ -16,5 +16,5 @@ COPY --from=build_step /app/ ./
 
 #CMD [ "bash" ]
 #CMD ["node", "."]
-CMD ["yarn", "app:run"]
+CMD ["yarn", "preview"]
 #CMD ["yarn", "dev", "--host"]
