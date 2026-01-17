@@ -1,0 +1,6 @@
+services:
+  app:
+    container_name: web-pdf
+    image: ghcr.io/arnstadfredrik/web-pdf:latest
+    ports:
+      - 3000:3000
