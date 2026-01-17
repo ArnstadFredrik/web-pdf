@@ -1,11 +1,10 @@
 <script>
-    import Icon from "$lib/Icon.svelte";
+    import Icon from "$component/Icon.svelte";
     import { mdiFileDownload, mdiPrinter, mdiEye, mdiDelete } from "@mdi/js";
-    import { data } from "$lib/data.svelte.js";
+    import { data } from "$data";
     import { browser } from "$app/environment";
     import { onMount } from "svelte";
-    import { handleConvert } from "$lib/handleConvert.js";
-    import Loader from "./Loader.svelte";
+    import Loader from "$component/Loader.svelte";
 
     let { file, i } = $props();
 
@@ -29,48 +28,37 @@
     };
 </script>
 
-<div class="list_row" data-key={file.key}>
-    <p class="fileName">{file.name}</p>
+<div
+    class="grid grid-cols-4 gap-2 bg-neutral-200 dark:bg-neutral-800 p-5 rounded-sm"
+    data-key={file.key}
+>
+    <p class="col-span-4">{file.name}</p>
     {#if file.process == "working"}
         <Loader />
     {:else if file.process == "done"}
         <a
             href={file.download.url}
             download={`${file.fileName}-hefte.pdf`}
-            class="download_button"
+            class="place-self-center"
         >
-            <button class="color-green">
+            <button class="button-green">
                 <Icon mdi={mdiFileDownload} />
             </button>
         </a>
-        <button onclick={handlePrint} class="color-green print_button">
+        <button onclick={handlePrint} class="button-green place-self-center">
             <Icon mdi={mdiPrinter} />
         </button>
-        <a href={file.download.url} target="_blank" class="preview_button">
-            <button onclick={handlePreview} class="color-blue">
+        <a href={file.download.url} target="_blank" class="place-self-center">
+            <button onclick={handlePreview} class="button-blue">
                 <Icon mdi={mdiEye} />
             </button>
         </a>
-        <button onclick={handleDelete} data-key={file.key} class="color-red">
+        <button
+            onclick={handleDelete}
+            data-key={file.key}
+            class="button-red place-self-center"
+        >
             <Icon mdi={mdiDelete} />
         </button>
     {/if}
 </div>
-
-<style>
-    .list_row {
-        --padding: 1rem;
-        padding: var(--padding);
-        background-color: var(--color-highlight);
-        border-radius: var(--radius);
-        gap: 1rem;
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        grid-template-rows: repeat(
-            2,
-            calc(var(--fs-md) + var(--padding) + var(--padding))
-        );
-        justify-items: center;
-        align-items: center;
-    }
-</style>

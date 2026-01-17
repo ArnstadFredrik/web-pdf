@@ -1,0 +1,31 @@
+@import "tailwindcss";
+
+@layer base {
+    h1 {
+        @apply text-3xl;
+    }
+    h2 {
+        @apply text-2xl;
+    }
+    button {
+        @apply p-2 rounded-md;
+    }
+}
+
+@layer components {
+    .button {
+        @apply p-2 rounded-md;
+    }
+
+    .button-green {
+        @apply bg-emerald-600 hover:bg-emerald-500 hover:transition;
+    }
+
+    .button-blue {
+        @apply bg-cyan-600 hover:bg-cyan-500 hover:transition;
+    }
+
+    .button-red {
+        @apply bg-red-500 hover:bg-red-400 hover:transition;
+    }
+}

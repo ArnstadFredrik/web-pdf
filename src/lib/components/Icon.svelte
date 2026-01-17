@@ -4,5 +4,5 @@
 </script>
 
 <svg viewBox="0 0 24 24" width={htmlSize} height={htmlSize}>
-    <path fill={color} d={mdi} />
+    <path fill={color} d={mdi} class={color} />
 </svg>

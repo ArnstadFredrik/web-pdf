@@ -1,6 +1,6 @@
 <script>
-    import { convertAll } from "$lib/handleConvert.js";
-    let { setting } = $props();
+    import { convertAll } from "$js/handleFunctions.js";
+    let { setting = $bindable() } = $props();
 </script>
 
 <div class={setting.type}>
