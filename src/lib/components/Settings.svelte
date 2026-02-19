@@ -1,9 +1,21 @@
 <script module>
     let shortEdge = $state(false);
+
     export const shortEdgeState = () => shortEdge;
 </script>
 
 <script>
+    $effect(() => {
+        const savedShortEdge = localStorage.getItem("shortEdge");
+        console.log("saved state", savedShortEdge);
+        if (savedShortEdge) shortEdge = JSON.parse(savedShortEdge);
+    });
+
+    $effect(() => {
+        console.log("app state:", shortEdge);
+        localStorage.setItem("shortEdge", shortEdge);
+    });
+
     import { convertAll } from "$lib/js/handleFunctions.js";
     import { mdiClose, mdiCog } from "@mdi/js";
     import Icon from "./Icon.svelte";
