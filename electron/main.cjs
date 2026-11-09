@@ -1,19 +1,13 @@
-const { app, BrowserWindow, shell, protocol } = require("electron");
+const { app, BrowserWindow, shell } = require("electron");
 const path = require("path");
+const { startStaticServer } = require("./static-server.cjs");
 
-// Roten til det statiske SvelteKit-bygget
+// Roten til det statiske SvelteKit-bygget (også inni app.asar)
 const DIST = path.join(__dirname, "..", "build");
 
-// SvelteKit emitter absolutte stier ("/_app/..."). Vi fanger file://-protocolen
-function mapFileUrl(requestUrl) {
-  let p = decodeURIComponent(requestUrl.substring("file://".length));
-  // file:///C:/... på Windows; her er vi primært mac/linux
-  if (/^\/[A-Za-z]:\//.test(p)) p = p.substring(1);
-  if (p === "" || p === "/") p = "/index.html";
-  return path.join(DIST, p);
-}
+let lastUrl = null;
 
-function createWindow() {
+function createWindow(url) {
   const win = new BrowserWindow({
     width: 1000,
     height: 800,
@@ -29,20 +23,29 @@ function createWindow() {
 
   // Åpne eksterne lenker i standardnettleseren
   win.webContents.setWindowOpenHandler(({ url }) => {
-    if (/^https?:/i.test(url)) shell.openExternal(url);
+    if (/^https?:/i.test(url) && !url.startsWith("http://127.0.0.1")) {
+      shell.openExternal(url);
+    }
     return { action: "deny" };
   });
 
-  win.loadURL("file:///index.html");
+  win.loadURL(url);
+  lastUrl = url;
 }
 
-app.whenReady().then(() => {
-  protocol.interceptFileProtocol("file", (request, callback) => {
-    callback(mapFileUrl(request.url));
-  });
-  createWindow();
+app.whenReady().then(async () => {
+  try {
+    const srv = await startStaticServer(DIST);
+    const port = srv.address().port;
+    createWindow(`http://127.0.0.1:${port}/`);
+  } catch (err) {
+    // Fallback: prøv file:// direkte
+    createWindow("file://" + path.join(DIST, "index.html"));
+  }
   app.on("activate", () => {
-    if (BrowserWindow.getAllWindows().length === 0) createWindow();
+    if (BrowserWindow.getAllWindows().length === 0 && lastUrl) {
+      createWindow(lastUrl);
+    }
   });
 });
 
