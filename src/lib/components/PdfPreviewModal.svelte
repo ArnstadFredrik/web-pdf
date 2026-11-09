@@ -7,7 +7,13 @@
     import { mdiClose } from "@mdi/js";
 
     const close = () => (data.preview = null);
+
+    const handleKeydown = (e) => {
+        if (e.key === "Escape" && data.preview) close();
+    };
 </script>
+
+<svelte:window onkeydown={handleKeydown} />
 
 {#if data.preview}
     <!-- svelte-ignore a11y_click_events_have_key_events, a11y_no_noninteractive_element_interactions -->

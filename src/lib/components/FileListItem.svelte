@@ -50,11 +50,9 @@
         <button onclick={handlePrint} class="button-green place-self-center">
             <Icon mdi={mdiPrinter} />
         </button>
-        <a href={file.download.url} target="_blank" class="place-self-center">
-            <button onclick={handlePreview} class="button-blue">
-                <Icon mdi={mdiEye} />
-            </button>
-        </a>
+        <button onclick={handlePreview} class="button-blue place-self-center">
+            <Icon mdi={mdiEye} />
+        </button>
         <button
             onclick={handleDelete}
             data-key={file.key}
