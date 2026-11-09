@@ -1,7 +1,7 @@
 {
   "name": "web-hefte",
   "private": true,
-  "version": "0.3.2",
+  "version": "0.3.3",
   "type": "module",
   "main": "electron/main.cjs",
   "build": {
@@ -10,14 +10,23 @@
     "directories": {
       "output": "release"
     },
-    "files": ["build/**", "electron/**"],
+    "files": [
+      "build/**",
+      "electron/**"
+    ],
     "mac": {
-      "target": ["dmg", "zip"],
+      "target": [
+        "dmg",
+        "zip"
+      ],
       "category": "public.app-category.utilities",
       "icon": "static/icon.png"
     },
     "win": {
-      "target": ["nsis", "zip"],
+      "target": [
+        "nsis",
+        "zip"
+      ],
       "icon": "static/icon.png"
     }
   },
