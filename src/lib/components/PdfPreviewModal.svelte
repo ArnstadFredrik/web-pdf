@@ -8,6 +8,14 @@
 
     const close = () => (data.preview = null);
 
+    // Mobil: innebygd PDF-visning i iframe støttes ikke (hvit boks, ingen
+    // zoom/blading) – åpne blob-URLen i en ny fane der native PDF-visning
+    // med pinch-zoom tar over.
+    const openInNewTab = () => {
+        if (data.preview?.url) window.open(data.preview.url, "_blank");
+        close();
+    };
+
     const handleKeydown = (e) => {
         if (e.key === "Escape" && data.preview) close();
     };
@@ -25,15 +33,25 @@
         role="dialog"
         aria-label="Forhåndsvisning"
     >
-        <div class="flex items-center justify-between text-white">
+        <div class="flex items-center justify-between gap-3 text-white">
             <p class="truncate">{data.preview.name}-hefte.pdf</p>
-            <button
-                class="button-red shrink-0"
-                onclick={close}
-                aria-label="Lukk forhåndsvisning"
-            >
-                <Icon mdi={mdiClose} />
-            </button>
+            <div class="flex items-center gap-2 shrink-0">
+                <!-- Fallback for enheter der iframe-visningen ikke fungerer -->
+                <button
+                    class="button-primary"
+                    onclick={openInNewTab}
+                    aria-label="Åpne PDF i ny fane"
+                >
+                    Åpne i ny fane
+                </button>
+                <button
+                    class="button-red"
+                    onclick={close}
+                    aria-label="Lukk forhåndsvisning"
+                >
+                    <Icon mdi={mdiClose} />
+                </button>
+            </div>
         </div>
         <iframe
             src={data.preview.url}

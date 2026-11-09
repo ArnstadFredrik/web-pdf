@@ -21,7 +21,16 @@
         }
     };
     const handlePreview = (e) => {
-        if (file.download) {
+        if (!file.download) return;
+        // Mobil: innebygd PDF-visning i modal-iframe fungerer ikke
+        // (hvit boks, ingen zoom/blading). Åpne i ny fane der
+        // nettleserens native PDF-visning med pinch-zoom tar over.
+        const isMobile =
+            window.matchMedia("(pointer: coarse)").matches &&
+            window.matchMedia("(max-width: 1024px)").matches;
+        if (isMobile) {
+            window.open(file.download.url, "_blank");
+        } else {
             data.preview = { url: file.download.url, name: file.fileName };
         }
     };
