@@ -3,6 +3,7 @@ export let data = $state({
   upload: [],
   download: [],
   settingsMenu: false,
+  preview: null,
   settings: [
     {
       state: false,

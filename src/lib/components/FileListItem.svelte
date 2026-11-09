@@ -21,7 +21,9 @@
         }
     };
     const handlePreview = (e) => {
-        console.log(e);
+        if (file.download) {
+            data.preview = { url: file.download.url, name: file.fileName };
+        }
     };
     const handleDelete = (e) => {
         data.files = data.files.filter((e) => e.key != file.key);

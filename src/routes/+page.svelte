@@ -3,6 +3,7 @@
     import Settings from "$component/Settings.svelte";
     import { data } from "$data";
     import FileList from "$component/FileList.svelte";
+    import PdfPreviewModal from "$component/PdfPreviewModal.svelte";
 </script>
 
 <svelte:head>
@@ -13,3 +14,4 @@
 <Upload />
 <Settings />
 <FileList />
+<PdfPreviewModal />
