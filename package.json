@@ -15,6 +15,10 @@
       "target": ["dmg", "zip"],
       "category": "public.app-category.utilities",
       "icon": "static/icon.png"
+    },
+    "win": {
+      "target": ["nsis", "zip"],
+      "icon": "static/icon.png"
     }
   },
   "scripts": {
@@ -25,6 +29,7 @@
     "app:run": "node build",
     "electron:dev": "ADAPTER=static vite build && electron .",
     "electron:build": "ADAPTER=static vite build && electron-builder --mac",
+    "electron:build:win": "ADAPTER=static vite build && electron-builder --win",
     "app:dir": "electron-builder --dir"
   },
   "dependencies": {

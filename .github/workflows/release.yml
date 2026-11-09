@@ -1,7 +1,7 @@
 name: Release (Mac-app + Docker-image)
 
 # Kjøres når en release publiseres (tag v*.*.* eller «Publish release» i UI).
-# Bygger Mac-app (dmg/zip) og Docker-image, og legger begge i releasen.
+# Bygger Mac-app, Windows-app og Docker-image, og legger alt i releasen.
 on:
   push:
     tags:
@@ -48,6 +48,33 @@ jobs:
         with:
           files: |
             release/*.dmg
+            release/*.zip
+
+  windows-app:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Build static SPA
+        run: npx --yes -p cross-env cross-env ADAPTER=static npx vite build
+
+      - name: Build Windows app
+        run: npx electron-builder --win --publish never
+
+      - name: Attach app to release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            release/*.exe
             release/*.zip
 
   docker-image:
