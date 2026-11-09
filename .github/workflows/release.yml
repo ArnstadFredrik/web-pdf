@@ -38,7 +38,7 @@ jobs:
         run: npx --yes -p cross-env cross-env ADAPTER=static npx vite build
 
       - name: Build Mac app
-        run: npx electron-builder --mac
+        run: npx electron-builder --mac --publish never
         env:
           # Uten Apple Developer-signering: bygg uregistrert (ad hoc)
           CSC_IDENTITY_AUTO_DISCOVERY: "false"
