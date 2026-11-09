@@ -17,3 +17,12 @@ services:
 - [x] Add support for multiple files
 - [x] Separate upload list, and workspace list. Add support for removing files from workspace, and uploading new, without deleting the entire list.
 - [x] Manifest file and web app support
+
+## Mac desktop app (Electron)
+
+```
+yarn install
+npm run electron:build
+```
+
+Ferdig app ligger i `release/` (PDF Hefte.app + dmg). Utvikling: `npm run electron:dev`.
