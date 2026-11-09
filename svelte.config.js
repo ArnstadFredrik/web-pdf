@@ -12,9 +12,9 @@ const config = {
       : adapter(),
     paths: useStatic ? { relative: true } : undefined,
     alias: {
-      $component: "/src/lib/components/",
-      $js: "/src/lib/js/",
-      $data: "/src/lib/data/data.svelte.js",
+      $component: "src/lib/components/",
+      $js: "src/lib/js/",
+      $data: "src/lib/data/data.svelte.js",
     },
   },
   compilerOptions: {
