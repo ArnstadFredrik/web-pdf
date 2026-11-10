@@ -78,12 +78,13 @@ function createStaticServer(distDir, log) {
   });
 }
 
-function startStaticServer(distDir, log) {
+function startStaticServer(distDir, port = 0, log) {
+  // port 0 = ledig port velges av OS; fast port gir stabil
+  // opprinnelse (og dermed vedvarende localStorage) i Electron
   return new Promise((resolve, reject) => {
     const srv = createStaticServer(distDir, log);
     srv.on("error", reject);
-    // Port 0 = ledig port velges av OS
-    srv.listen(0, "127.0.0.1", () => resolve(srv));
+    srv.listen(port, "127.0.0.1", () => resolve(srv));
   });
 }
 

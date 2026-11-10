@@ -5,6 +5,10 @@ const { startStaticServer } = require("./static-server.cjs");
 // Roten til det statiske SvelteKit-bygget (også inni app.asar)
 const DIST = path.join(__dirname, "..", "build");
 
+// Fast port gjør at opprinnelsen (og dermed localStorage, som
+// innstillingene lagres i) er stabil mellom kjøringer.
+const PORT = 38417;
+
 let lastUrl = null;
 
 function createWindow(url) {
@@ -23,7 +27,7 @@ function createWindow(url) {
 
   // Åpne eksterne lenker i standardnettleseren
   win.webContents.setWindowOpenHandler(({ url }) => {
-    if (/^https?:/i.test(url) && !url.startsWith("http://127.0.0.1")) {
+    if (/^https?:/i.test(url) && !url.startsWith(`http://127.0.0.1:${PORT}`)) {
       shell.openExternal(url);
     }
     return { action: "deny" };
@@ -33,15 +37,18 @@ function createWindow(url) {
   lastUrl = url;
 }
 
-app.whenReady().then(async () => {
+async function start() {
   try {
-    const srv = await startStaticServer(DIST);
-    const port = srv.address().port;
-    createWindow(`http://127.0.0.1:${port}/`);
+    const srv = await startStaticServer(DIST, PORT);
+    createWindow(`http://127.0.0.1:${srv.address().port}/`);
   } catch (err) {
-    // Fallback: prøv file:// direkte
+    // Fallback: prøv file:// direkte (localStorage kan da være mindre stabil)
     createWindow("file://" + path.join(DIST, "index.html"));
   }
+}
+
+app.whenReady().then(async () => {
+  await start();
   app.on("activate", () => {
     if (BrowserWindow.getAllWindows().length === 0 && lastUrl) {
       createWindow(lastUrl);
